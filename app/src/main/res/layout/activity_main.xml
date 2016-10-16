@@ -17,7 +17,6 @@
         android:id="@+id/add_notification"
         android:layout_marginTop="159dp"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:elevation="0dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:background="@color/blue"
         android:layout_below="@+id/textView"
@@ -37,12 +36,11 @@
         android:layout_marginTop="53dp" />
 
     <TextView
+        android:id="@+id/textView"
         android:text="@string/titleMainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:layout_alignParentTop="true"
+        android:textAppearance="@style/titreActivityStyle"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

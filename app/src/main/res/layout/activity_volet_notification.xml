@@ -48,12 +48,11 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
     <TextView
+        android:id="@+id/textView2"
         android:text="@string/titleVoletActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/nextActivityButton"
-        android:layout_alignEnd="@+id/nextActivityButton" />
+        android:textAppearance="@style/titreActivityStyle"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

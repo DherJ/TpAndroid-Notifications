@@ -33,13 +33,11 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
     <TextView
+        android:id="@+id/titleTextView"
         android:text="@string/titleVoletLayoutActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:id="@+id/titleTextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:layout_alignParentTop="true"
+        android:textAppearance="@style/titreActivityStyle"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

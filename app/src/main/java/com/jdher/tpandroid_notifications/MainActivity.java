@@ -9,22 +9,17 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int REQUEST_CODE = 1;
-    private static final int NOTIFICATION_ID = 1;
-    private Button addNotificationButton;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        addNotificationButton = (Button) findViewById(R.id.add_notification);
+        Button addNotificationButton = (Button) findViewById(R.id.add_notification);
 
         addNotificationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createSimpleNotification("Ajouter une notification Toaster");
+                createSimpleNotification("Toaster Notification");
             }
         });
     }

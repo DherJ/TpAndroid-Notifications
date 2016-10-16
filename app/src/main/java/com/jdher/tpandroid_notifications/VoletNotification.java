@@ -15,24 +15,20 @@ public class VoletNotification extends AppCompatActivity {
     private static final int REQUEST_CODE = 1;
     private static final int NOTIFICATION_ID = 1;
 
-    private Button notificationButton;
-    private Button deleteNotificationButton;
-    private Button nextActivityButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_volet_notification);
 
-        notificationButton = (Button) findViewById(R.id.button);
+        Button notificationButton = (Button) findViewById(R.id.button);
         notificationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createNotificationVibration("Mon titre", "test vibrate");
+                createNotificationVibration("Mon titre", "Mon text");
             }
         });
 
-        nextActivityButton = (Button) findViewById(R.id.nextActivityButton);
+        Button nextActivityButton = (Button) findViewById(R.id.nextActivityButton);
         nextActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,7 +36,7 @@ public class VoletNotification extends AppCompatActivity {
             }
         });
 
-        deleteNotificationButton = (Button) findViewById(R.id.deleteNotificationButton);
+        Button deleteNotificationButton = (Button) findViewById(R.id.deleteNotificationButton);
         deleteNotificationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,26 +45,7 @@ public class VoletNotification extends AppCompatActivity {
         });
     }
 
-    // créer une notification dans le volet
-    private void createNotification (String title, String body) {
-        final NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-        final Intent launchNotificationIntent = new Intent(this, MainActivity.class);
-        final PendingIntent pendingIntent = PendingIntent.getActivity(this,
-                REQUEST_CODE, launchNotificationIntent,
-                PendingIntent.FLAG_ONE_SHOT);
-
-        Notification.Builder builder = new Notification.Builder(getBaseContext())
-                .setWhen(System.currentTimeMillis())
-                .setTicker(body)
-                .setSmallIcon(R.drawable.notification)
-                .setContentText(body.toString())
-                .setContentTitle(title.toString())
-                .setContentIntent(pendingIntent);
-        nm.notify(NOTIFICATION_ID, builder.build());
-    }
-
-    private final void createNotificationVibration(String title, String body){
+    private void createNotificationVibration(String title, String body){
 
         // On instancie le service de notification
         final NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -80,16 +57,18 @@ public class VoletNotification extends AppCompatActivity {
         final PendingIntent pendingIntent = PendingIntent.getActivity(this,
                 REQUEST_CODE, launchNotificationIntent,
                 PendingIntent.FLAG_ONE_SHOT);
-
         // On construit notre notification
         Notification.Builder builder = new Notification.Builder(this)
                 .setWhen(System.currentTimeMillis())
                 .setTicker(body)
                 .setSmallIcon(R.drawable.notification)
-                .setContentText(body.toString())
-                .setContentTitle(title.toString())
+                .setContentText(body)
+                .setContentTitle(title)
                 .setContentIntent(pendingIntent)
+                //.addAction(R.drawable.play,"Play", PendingIntent.getActivity(getApplicationContext(), 0,
+                //        getIntent(), 0, null))
                 .setVibrate(new long[] {0,200,100,200,100,200});
+
         nm.notify(NOTIFICATION_ID, builder.build());
     }
 
