@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="toasterNotification">Toaster Notification</string>
+    <string name="notification">Notification</string>
+    <string name="bandeauNotification">Bandeau notification</string>
+    <string name="activityVolet">Go to next</string>
+    <string name="deleteNotification">Supprimer Notification</string>
+</resources>

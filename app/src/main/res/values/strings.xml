@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">TpAndroid-Notifications</string>
+    <string name="toasterNotification">Toaster Notification</string>
+    <string name="notification">Notification</string>
+    <string name="notificationCustomLayout">Notification Custom Layout</string>
+    <string name="voletNotification">Volet notification</string>
+    <string name="nextActivity">Activité suivante</string>
+    <string name="deleteNotification">Supprimer Notification</string>
+    <string name="customnotificationtitle">Titre Notifications</string>
+    <string name="customnotificationtext">Text notification</string>
+    <string name="customnotificationticker">Ticker notification</string>
+    <string name="customnotification">Custom Notification</string>
+    <string name="lbltitle">title</string>
+    <string name="lbltext">text</string>
+    <string name="newMessage">New message</string>
+    <string name="receiveMessage">You\'ve received new message.</string>
+    <string name="clickMe">Click me</string>
+    <string name="toaster">Créer un Toaster</string>
+
+
+    <string name="titleMainActivity">Toaster notification</string>
+    <string name="titleVoletActivity">Volet notification</string>
+    <string name="titleVoletLayoutActivity">Volet custom notification</string>
+</resources>
