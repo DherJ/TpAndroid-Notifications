@@ -45,6 +45,11 @@ public class VoletNotification extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
     private void createNotificationVibration(String title, String body){
 
         // On instancie le service de notification
@@ -57,6 +62,11 @@ public class VoletNotification extends AppCompatActivity {
         final PendingIntent pendingIntent = PendingIntent.getActivity(this,
                 REQUEST_CODE, launchNotificationIntent,
                 PendingIntent.FLAG_ONE_SHOT);
+
+        // Intent pour l'action sur un élément dans la notification
+        Intent actionNotificationIntent = new Intent(this, MainActivity.class);
+
+
         // On construit notre notification
         Notification.Builder builder = new Notification.Builder(this)
                 .setWhen(System.currentTimeMillis())
@@ -65,8 +75,7 @@ public class VoletNotification extends AppCompatActivity {
                 .setContentText(body)
                 .setContentTitle(title)
                 .setContentIntent(pendingIntent)
-                //.addAction(R.drawable.play,"Play", PendingIntent.getActivity(getApplicationContext(), 0,
-                //        getIntent(), 0, null))
+                .addAction(R.drawable.play,"Play", PendingIntent.getActivity(this, 0, actionNotificationIntent, 0) )
                 .setVibrate(new long[] {0,200,100,200,100,200});
 
         nm.notify(NOTIFICATION_ID, builder.build());

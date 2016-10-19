@@ -17,6 +17,9 @@ import android.widget.RemoteViews;
 @SuppressWarnings("deprecation")
 public class VoletNotificationCustomLayout extends AppCompatActivity {
 
+    private static final int NOTIFICATION_ID_1 = 1;
+    private static final int NOTIFICATION_ID_2 = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,11 @@ public class VoletNotificationCustomLayout extends AppCompatActivity {
                 displayCustomLayoutNotification();
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     public void displayCustomLayoutNotification() {
@@ -66,52 +74,7 @@ public class VoletNotificationCustomLayout extends AppCompatActivity {
         notification.defaults |= Notification.DEFAULT_VIBRATE; // Vibration
         notification.defaults |= Notification.DEFAULT_SOUND; // Sound
 
-        mNotificationManager.notify(1, notification);
-    }
-
-    protected void displaySimpleNotification3() {
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-
-        //Create Intent to launch this Activity again if the notification is clicked.
-        Intent i = new Intent(this, NotificationView.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent intent = PendingIntent.getActivity(this, 0, i,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentIntent(intent);
-
-        // Sets the ticker text
-        builder.setTicker(getResources().getString(R.string.customnotificationticker));
-
-        // Sets the small icon for the ticker
-        builder.setSmallIcon(R.drawable.notification);
-
-        // Cancel the notification when clicked
-        builder.setAutoCancel(true);
-
-        // Build the notification
-        Notification notification = builder.build();
-
-        // Inflate the notification layout as RemoteViews
-        RemoteViews contentView = new RemoteViews(getPackageName(), R.layout.custom_layout_notification);
-
-        // Set text on a TextView in the RemoteViews programmatically.
-        final String text = getString(R.string.customnotificationtext);
-        contentView.setTextViewText(R.id.textView, text);
-        notification.contentView = contentView;
-
-        // Add a big content view to the notification if supported.
-        // Support for expanded notifications was added in API level 16.
-        // (The normal contentView is shown when the notification is collapsed, when expanded the
-        // big content view set here is displayed.)
-        if (Build.VERSION.SDK_INT >= 16) {
-            // Inflate and set the layout for the expanded notification view
-            notification.bigContentView = new RemoteViews(getPackageName(), R.layout.custom_layout_notification);
-        }
-
-        // Use the NotificationManager to show the notification
-        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        nm.notify(0, notification);
+        mNotificationManager.notify(NOTIFICATION_ID_2, notification);
     }
 
     protected void displayNotification() {
@@ -143,6 +106,14 @@ public class VoletNotificationCustomLayout extends AppCompatActivity {
         mBuilder.setContentIntent(resultPendingIntent);
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        mNotificationManager.notify(1, mBuilder.build());
+        mNotificationManager.notify(NOTIFICATION_ID_1, mBuilder.build());
+    }
+
+
+    private void deleteNotification(){
+        final NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        //la suppression de la notification se fait grâce à son ID
+        notificationManager.cancel(NOTIFICATION_ID_1);
+        notificationManager.cancel(NOTIFICATION_ID_2);
     }
 }
