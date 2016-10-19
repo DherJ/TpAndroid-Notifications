@@ -3,7 +3,6 @@ package com.jdher.tpandroid_notifications;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -42,8 +41,19 @@ public class VoletNotificationCustomLayout extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        deleteNotifications();
     }
 
     public void displayCustomLayoutNotification() {
@@ -92,16 +102,21 @@ public class VoletNotificationCustomLayout extends AppCompatActivity {
 
         /* Au clic sur la notification on est dirigé sur l'activity NotificationView */
         Intent resultIntent = new Intent(this, NotificationView.class);
+        resultIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
 
         /** Le taskStackBuilder permet de définir l'activity parente de la notifiction, si on appuie sue le
           * bouton back après avoir cliqué sur la notification, on retourne sur la vue VoletNotificaion
          **/
+        /**
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         stackBuilder.addParentStack(VoletNotification.class);
-
-        /* Adds the Intent that starts the Activity to the top of the stack */
         stackBuilder.addNextIntent(resultIntent);
-        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
+        // Adds the Intent that starts the Activity to the top of the stack
+        stackBuilder.addNextIntent(resultIntent);
+         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
+        **/
+
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(getBaseContext(),0,resultIntent,PendingIntent.FLAG_CANCEL_CURRENT);
 
         mBuilder.setContentIntent(resultPendingIntent);
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -110,7 +125,7 @@ public class VoletNotificationCustomLayout extends AppCompatActivity {
     }
 
 
-    private void deleteNotification(){
+    private void deleteNotifications(){
         final NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         //la suppression de la notification se fait grâce à son ID
         notificationManager.cancel(NOTIFICATION_ID_1);

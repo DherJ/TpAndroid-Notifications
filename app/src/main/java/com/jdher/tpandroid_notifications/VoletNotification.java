@@ -46,8 +46,19 @@ public class VoletNotification extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        deleteNotification();
     }
 
     private void createNotificationVibration(String title, String body){
